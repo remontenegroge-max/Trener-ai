@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Asistente Virtual - Colegio Trener</title>
-<link rel="icon" href="https://www.trener.edu.pe/web/img/favicon.ico">
+<link rel="icon" type="image/png" href="logo.png">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -13,25 +13,26 @@
   .typing span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#9ca3af;margin:0 2px;animation:tp 1.3s infinite}
   .typing span:nth-child(2){animation-delay:.2s}.typing span:nth-child(3){animation-delay:.4s}
   @keyframes tp{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-4px)}}
+  .logo-badge{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;font-family:Georgia,'Times New Roman',serif;font-weight:700;display:inline-flex;align-items:center;justify-content:center;border-radius:14px;box-shadow:0 4px 14px rgba(30,58,138,.35);letter-spacing:.5px}
+  .logo-badge-sm{width:40px;height:40px;font-size:22px;border-radius:10px}
+  .logo-badge-md{width:52px;height:52px;font-size:28px;border-radius:12px}
+  .logo-badge-lg{width:72px;height:72px;font-size:40px}
 </style>
 </head>
 <body class="m-0 p-0">
 
 <!-- ========== MAIN CHATBOT ========== -->
 <div id="mainApp" class="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex flex-col">
-  <header class="bg-blue-900/80 backdrop-blur border-b border-blue-600/50 px-4 py-3">
-    <div class="max-w-4xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="https://www.trener.edu.pe/web/images/logos/logo-horizontal-color-blanco.svg" alt="Colegio Trener" class="h-10 object-contain" onerror="this.style.display='none'">
-        <div>
-          <div class="text-white font-semibold text-sm leading-tight">Asistente Virtual</div>
-          <div class="text-blue-300 text-xs">9no B &middot; 2026</div>
+  <header class="bg-white border-b-[3px] border-[#8B1F2A] shadow-md px-4 py-3">
+    <div class="max-w-4xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 min-w-0">
+        <img src="logo-header.png" alt="Colegio Trener" class="h-14 md:h-16 object-contain flex-shrink-0">
+        <div class="border-l-2 border-gray-200 pl-4 min-w-0">
+          <div class="text-[#1E6B7A] font-bold text-base leading-tight truncate">Asistente Virtual</div>
+          <div class="text-gray-500 text-xs mt-0.5">9no B &middot; 2026</div>
         </div>
       </div>
-      <div class="flex items-center gap-2">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-blue-300"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
-        <button onclick="goAdmin()" class="text-blue-300 hover:text-white text-xs px-2 py-1 rounded border border-blue-600/50 hover:border-blue-400 transition-colors">Admin</button>
-      </div>
+      <button onclick="goAdmin()" class="text-[#1E6B7A] hover:bg-[#1E6B7A] hover:text-white text-xs font-semibold px-3 py-1.5 rounded-md border border-[#1E6B7A] transition-colors flex-shrink-0">Admin</button>
     </div>
   </header>
 
@@ -43,15 +44,16 @@
         <div id="welcome" class="flex items-center justify-center px-4 py-8 min-h-full">
           <div class="text-center max-w-2xl mx-auto w-full">
             <div class="mb-6">
-              <img src="https://www.trener.edu.pe/web/img/logo.png" alt="Colegio Trener" class="h-16 object-contain mx-auto mb-4" onerror="this.onerror=null;this.src='https://www.trener.edu.pe/web/images/logos/logo-horizontal-color.svg';this.onerror=function(){this.style.display='none'}">
+              <img src="logo.png" alt="Trener" class="w-20 h-20 mx-auto mb-4 rounded-xl shadow-lg">
               <h1 class="text-3xl font-bold text-blue-900 mb-2">Asistente Trener</h1>
               <p class="text-gray-600 text-base">Consulta tus tareas y ex&aacute;menes de <strong>9no B</strong></p>
+              <div id="welcomeSummary" class="mt-4 hidden"></div>
             </div>
             <div class="grid grid-cols-2 gap-3 max-w-lg mx-auto mb-6">
-              <button onclick="quickAsk('Ver todas las tareas')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#128218; Ver todas las tareas</button>
-              <button onclick="quickAsk('Ver ex&aacute;menes')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#128221; Ver ex&aacute;menes</button>
+              <button onclick="quickAsk('&iquest;Qu&eacute; debo priorizar?')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#127919; Qu&eacute; priorizar</button>
+              <button onclick="quickAsk('Plan de estudio')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#129504; Plan de estudio</button>
+              <button onclick="quickAsk('Ver todas las tareas')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#128218; Todas las tareas</button>
               <button onclick="quickAsk('Pr&oacute;ximas entregas')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#128197; Pr&oacute;ximas entregas</button>
-              <button onclick="quickAsk('Tareas de hoy')" class="p-3 text-left rounded-xl border border-blue-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-sm font-medium text-blue-800">&#128214; Tareas de hoy</button>
             </div>
             <div class="flex items-center gap-2 justify-center text-gray-400 text-xs">
               <span>&#128214; Impulsado por IA &middot; Colegio Trener Lima</span>
@@ -82,7 +84,6 @@
 <div id="adminLogin" class="hidden min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 flex items-center justify-center p-4">
   <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm p-8">
     <div class="text-center mb-6">
-      <img src="https://www.trener.edu.pe/web/img/logo.png" alt="Colegio Trener" class="h-12 object-contain mx-auto mb-4" onerror="this.style.display='none'">
       <h1 class="text-xl font-bold text-blue-900">Panel Administrativo</h1>
       <p class="text-gray-500 text-sm mt-1">9no B &middot; Acceso restringido</p>
     </div>
@@ -109,18 +110,18 @@
 
 <!-- ========== ADMIN PANEL ========== -->
 <div id="adminPanel" class="hidden min-h-screen bg-gray-50">
-  <header class="bg-blue-900 text-white px-4 py-3">
-    <div class="max-w-5xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <img src="https://www.trener.edu.pe/web/images/logos/logo-horizontal-color-blanco.svg" alt="Colegio Trener" class="h-9 object-contain" onerror="this.style.display='none'">
-        <div>
-          <div class="font-semibold text-sm">Panel Administrativo</div>
-          <div class="text-blue-300 text-xs">9no B &middot; Gesti&oacute;n de Tareas y Ex&aacute;menes</div>
+  <header class="bg-white border-b-[3px] border-[#8B1F2A] shadow-md px-4 py-3">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 min-w-0">
+        <img src="logo-header.png" alt="Colegio Trener" class="h-14 object-contain flex-shrink-0">
+        <div class="border-l-2 border-gray-200 pl-4 min-w-0">
+          <div class="font-bold text-base text-[#1E6B7A] leading-tight">Panel Administrativo</div>
+          <div class="text-gray-500 text-xs mt-0.5">9no B &middot; Gesti&oacute;n de Tareas y Ex&aacute;menes</div>
         </div>
       </div>
-      <div class="flex items-center gap-3">
-        <button onclick="goHome()" class="text-blue-300 hover:text-white text-xs flex items-center gap-1">&larr; Chatbot</button>
-        <button onclick="logout()" class="text-blue-300 hover:text-white text-xs flex items-center gap-1">Salir</button>
+      <div class="flex items-center gap-2 flex-shrink-0">
+        <button onclick="goHome()" class="text-[#1E6B7A] hover:bg-[#1E6B7A] hover:text-white text-xs font-semibold px-3 py-1.5 rounded-md border border-[#1E6B7A] transition-colors">&larr; Chatbot</button>
+        <button onclick="logout()" class="text-gray-600 hover:bg-gray-100 text-xs font-semibold px-3 py-1.5 rounded-md border border-gray-300 transition-colors">Salir</button>
       </div>
     </div>
   </header>
@@ -196,6 +197,32 @@ async function loadTasks(){
     }
   }catch(e){console.log('Load failed', e);}
   renderTasks();
+  renderWelcomeSummary();
+}
+
+function renderWelcomeSummary(){
+  var el = document.getElementById('welcomeSummary');
+  if(!el) return;
+  if(!tasks.length){ el.classList.add('hidden'); return; }
+
+  var overdue = 0, today = 0, soon = 0, examsSoon = 0;
+  tasks.forEach(function(t){
+    var d = daysUntil(t.dueDate);
+    if(d < 0) overdue++;
+    else if(d === 0) today++;
+    else if(d <= 7) soon++;
+    if(t.type === 'examen' && d >= 0 && d <= 7) examsSoon++;
+  });
+
+  var chips = [];
+  if(overdue) chips.push('<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-red-50 border border-red-200 text-red-700 text-xs font-medium">\u{1F534} ' + overdue + ' vencida' + (overdue>1?'s':'') + '</span>');
+  if(today) chips.push('<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-orange-700 text-xs font-medium">\u{1F7E0} ' + today + ' para hoy</span>');
+  if(soon) chips.push('<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-50 border border-yellow-200 text-yellow-700 text-xs font-medium">\u{1F7E1} ' + soon + ' esta semana</span>');
+  if(examsSoon) chips.push('<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-purple-700 text-xs font-medium">\u{1F4DD} ' + examsSoon + ' examen' + (examsSoon>1?'es':'') + ' próximo' + (examsSoon>1?'s':'') + '</span>');
+  if(!overdue && !today && !soon && !examsSoon) chips.push('<span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-medium">✅ Sin pendientes urgentes</span>');
+
+  el.innerHTML = '<div class="flex flex-wrap gap-2 justify-center">' + chips.join('') + '</div>';
+  el.classList.remove('hidden');
 }
 
 // ===== ROUTING =====
@@ -363,30 +390,124 @@ function scrollChat(){
   var s = document.getElementById('chatScroll');
   s.scrollTop = s.scrollHeight;
 }
+var AULA_CALENDAR_URL = 'https://colegiotrener.edu20.org/calendar';
+
 function fmtTask(t){
   var date = t.dueDate ? new Date(t.dueDate + 'T12:00:00').toLocaleDateString('es-PE', {weekday:'long', day:'numeric', month:'long'}) : 'Sin fecha';
   var icon = t.type === 'examen' ? '\u{1F4DD}' : '\u{1F4DA}';
-  return icon + ' <strong>' + esc(t.subject) + '</strong>\n   ' + esc(t.description||'') + '\n   \u{1F4C5} ' + esc(date);
+  // Siempre hay un link: la URL especifica de la tarea, o el calendario del aula virtual como fallback
+  var href = t.url || AULA_CALENDAR_URL;
+  var linkLabel = t.url ? 'abrir en aula' : 'buscar en calendario';
+  var link = ' <a href="' + esc(href) + '" target="_blank" class="text-blue-600 underline hover:text-blue-800">' + linkLabel + ' ↗</a>';
+  return icon + ' <strong>' + esc(t.subject) + '</strong>\n   ' + esc(t.description||'') + '\n   \u{1F4C5} ' + esc(date) + link;
+}
+
+// Calcula prioridad: vencidas > hoy > examenes proximos > tareas proximas
+function daysUntil(dueDate){
+  if(!dueDate) return 9999;
+  var today = new Date(); today.setHours(0,0,0,0);
+  var due = new Date(dueDate + 'T12:00:00');
+  return Math.floor((due - today) / 86400000);
+}
+function priorityScore(t){
+  var d = daysUntil(t.dueDate);
+  var typeWeight = t.type === 'examen' ? 40 : 0;
+  if(d < 0) return 1000 + Math.abs(d) + typeWeight;      // vencidas
+  if(d === 0) return 900 + typeWeight;                    // hoy
+  if(d === 1) return 700 + typeWeight;                    // manana
+  if(d <= 3) return 500 - d*10 + typeWeight;              // esta semana
+  if(d <= 7) return 300 - d + typeWeight;
+  return Math.max(50 - d, 10) + typeWeight;
+}
+function priorityLabel(t){
+  var d = daysUntil(t.dueDate);
+  if(d < 0) return '\u{1F534} VENCIDA hace ' + Math.abs(d) + 'd';
+  if(d === 0) return '\u{1F7E0} HOY';
+  if(d === 1) return '\u{1F7E0} MA\u00D1ANA';
+  if(d <= 3) return '\u{1F7E1} En ' + d + ' d\u00edas';
+  if(d <= 7) return '\u{1F7E2} En ' + d + ' d\u00edas';
+  if(d === 9999) return '\u26AA Sin fecha';
+  return '\u{1F7E2} En ' + d + ' d\u00edas';
+}
+
+// Extrae "temas" de la descripcion: bullets, items separados por coma/punto y coma, o lineas
+function extractTopics(desc){
+  if(!desc) return [];
+  var text = String(desc).trim();
+  // Detecta marcador "temas:" y toma solo lo que sigue
+  var m = text.match(/temas?\s*:\s*([\s\S]+)$/i);
+  if(m) text = m[1];
+  // Separa por bullets, saltos de linea, punto y coma, o coma
+  var parts = text.split(/[\n;\u2022\-]+|,(?=\s)/).map(function(s){return s.trim();}).filter(function(s){return s.length >= 3;});
+  // Si no hay separadores, devuelve la descripcion completa como un solo tema
+  if(parts.length <= 1) return text.length >= 3 ? [text] : [];
+  return parts.slice(0, 8);
+}
+
+function studyPlan(examList){
+  if(!examList.length) return '\u{1F4DD} No hay ex\u00e1menes registrados.';
+  var out = '\u{1F9E0} <strong>Plan de estudio sugerido</strong>\n\n';
+  examList.slice().sort(function(a,b){return priorityScore(b) - priorityScore(a);}).forEach(function(t){
+    var d = daysUntil(t.dueDate);
+    var date = t.dueDate ? new Date(t.dueDate + 'T12:00:00').toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'}) : 'Sin fecha';
+    out += '\u{1F4DD} <strong>' + esc(t.subject) + '</strong> \u00b7 ' + priorityLabel(t) + '\n';
+    out += '   \u{1F4C5} ' + esc(date) + '\n';
+    var topics = extractTopics(t.description);
+    if(topics.length){
+      out += '   <strong>Temas a estudiar:</strong>\n';
+      topics.forEach(function(tp){ out += '   \u2022 ' + esc(tp) + '\n'; });
+    }
+    // Consejo segun cuanto falta
+    var tip;
+    if(d < 0) tip = 'Ya pas\u00f3. Pregunta al profesor si puedes recuperar.';
+    else if(d === 0) tip = 'Es HOY. Repasa los puntos clave y descansa antes.';
+    else if(d === 1) tip = 'Es ma\u00f1ana. Haz un repaso general y resuelve ejercicios tipo.';
+    else if(d <= 3) tip = 'Divide los temas en ' + d + ' d\u00edas y repasa el \u00faltimo d\u00eda.';
+    else if(d <= 7) tip = 'Estudia 1 tema por d\u00eda y deja el final para repasar todo.';
+    else tip = 'Tienes tiempo: lee el material ahora y planifica sesiones cortas.';
+    out += '   \u{1F4A1} ' + tip + '\n\n';
+  });
+  return out.trim();
 }
 function chatResponse(input){
   var q = input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  var sorted = tasks.slice().sort(function(a,b){return (a.dueDate||'z').localeCompare(b.dueDate||'z');});
+  var byDate = tasks.slice().sort(function(a,b){return (a.dueDate||'z').localeCompare(b.dueDate||'z');});
+  var byPriority = tasks.slice().sort(function(a,b){return priorityScore(b) - priorityScore(a);});
 
-  if(q.match(/tarea|todas las|deberes/)){
-    var ts = sorted.filter(function(t){return t.type === 'tarea';});
+  // Plan de estudio / que estudiar para examenes
+  if(q.match(/plan de estudio|que estudiar|como estudiar|temas? de/)){
+    return studyPlan(tasks.filter(function(t){return t.type === 'examen';}));
+  }
+  // Priorizar / que hacer primero
+  if(q.match(/priori|que hago primero|que hacer primero|mas urgente|por donde empiezo|recomienda/)){
+    if(!tasks.length) return 'A\u00fan no hay tareas registradas.';
+    var top = byPriority.slice(0, 6);
+    var overdue = tasks.filter(function(t){return daysUntil(t.dueDate) < 0;}).length;
+    var header = '\u{1F3AF} <strong>Prioriza en este orden</strong>';
+    if(overdue) header += ' \u00b7 tienes <strong>' + overdue + ' vencida' + (overdue>1?'s':'') + '</strong>';
+    header += ':\n\n';
+    return header + top.map(function(t, i){
+      return (i+1) + '. ' + priorityLabel(t) + ' \u00b7 ' + (t.type === 'examen' ? '\u{1F4DD}' : '\u{1F4DA}') + ' <strong>' + esc(t.subject) + '</strong>\n   ' + esc(t.description||'');
+    }).join('\n\n');
+  }
+
+  if(q.match(/tarea|todas las|deberes/) && !q.match(/examen/)){
+    var ts = byPriority.filter(function(t){return t.type === 'tarea';});
     if(!ts.length) return '\u{1F4DA} <strong>No hay tareas registradas</strong> en este momento.';
-    return '\u{1F4DA} <strong>Tareas (' + ts.length + '):</strong>\n\n' + ts.map(fmtTask).join('\n\n');
+    return '\u{1F4DA} <strong>Tareas (' + ts.length + ') ordenadas por prioridad:</strong>\n\n' + ts.map(function(t){return priorityLabel(t) + '\n' + fmtTask(t);}).join('\n\n');
   }
   if(q.match(/examen|prueba|evaluacion/)){
-    var ts2 = sorted.filter(function(t){return t.type === 'examen';});
+    var ts2 = byPriority.filter(function(t){return t.type === 'examen';});
     if(!ts2.length) return '\u{1F4DD} <strong>No hay ex\u00e1menes programados</strong>.';
-    return '\u{1F4DD} <strong>Ex\u00e1menes (' + ts2.length + '):</strong>\n\n' + ts2.map(fmtTask).join('\n\n');
+    // Si pregunta con urgencia por examenes, suma plan de estudio
+    if(q.match(/estudiar|prepar|repasa|tema/)) return studyPlan(ts2);
+    return '\u{1F4DD} <strong>Ex\u00e1menes (' + ts2.length + ') ordenados por prioridad:</strong>\n\n' + ts2.map(function(t){return priorityLabel(t) + '\n' + fmtTask(t);}).join('\n\n');
   }
   if(q.match(/proxim|entrega|urgente|cerca/)){
     var today = new Date().toISOString().split('T')[0];
-    var upcoming = sorted.filter(function(t){return t.dueDate && t.dueDate >= today;}).slice(0, 5);
+    var upcoming = byDate.filter(function(t){return t.dueDate && t.dueDate >= today;}).slice(0, 5);
     if(!upcoming.length) return '\u{1F4C5} No hay entregas pr\u00f3ximas registradas.';
-    return '\u{1F4C5} <strong>Pr\u00f3ximas entregas:</strong>\n\n' + upcoming.map(fmtTask).join('\n\n');
+    return '\u{1F4C5} <strong>Pr\u00f3ximas entregas:</strong>\n\n' + upcoming.map(function(t){return priorityLabel(t) + '\n' + fmtTask(t);}).join('\n\n');
   }
   if(q.match(/\bhoy\b/)){
     var t1 = new Date().toISOString().split('T')[0];
@@ -405,12 +526,18 @@ function chatResponse(input){
     if(!tasks.length) return 'No hay registros todav\u00eda.';
     return '\u{1F4CB} <strong>Todos los registros (' + tasks.length + '):</strong>\n\n' + sorted.map(fmtTask).join('\n\n');
   }
-  if(q.match(/^(hola|buenas|hey|hi|hello|que tal)/)) return '\u00a1Hola! \u{1F44B} Soy el <strong>Asistente Trener</strong> de 9no B. Preg\u00fantame por las <strong>tareas</strong>, <strong>ex\u00e1menes</strong> o entregas <strong>pr\u00f3ximas</strong>.';
+  if(q.match(/^(hola|buenas|hey|hi|hello|que tal)/)) return '\u00a1Hola! \u{1F44B} Soy el <strong>Asistente Trener</strong> de 9no B. Preg\u00fantame por las <strong>tareas</strong>, <strong>ex\u00e1menes</strong>, entregas <strong>pr\u00f3ximas</strong> o qu\u00e9 <strong>priorizar</strong>.';
   if(q.match(/gracias|thanks/)) return '\u00a1De nada! \u{1F60a}';
-  if(q.match(/quien eres|que eres|ayuda|help/)) return 'Soy el <strong>Asistente Trener</strong> para 9no B. Puedo mostrarte:\n\u2022 \u{1F4DA} Tareas pendientes\n\u2022 \u{1F4DD} Ex\u00e1menes programados\n\u2022 \u{1F4C5} Pr\u00f3ximas entregas\n\u2022 \u2600\uFE0F Lo de hoy / ma\u00f1ana';
+  if(q.match(/quien eres|que eres|ayuda|help/)) return 'Soy el <strong>Asistente Trener</strong> para 9no B. Puedo mostrarte:\n\u2022 \u{1F4DA} Tareas pendientes\n\u2022 \u{1F4DD} Ex\u00e1menes programados\n\u2022 \u{1F4C5} Pr\u00f3ximas entregas\n\u2022 \u2600\uFE0F Lo de hoy / ma\u00f1ana\n\u2022 \u{1F3AF} Qu\u00e9 priorizar / por d\u00f3nde empezar\n\u2022 \u{1F9E0} Plan de estudio para ex\u00e1menes';
   if(!tasks.length) return 'A\u00fan no hay tareas ni ex\u00e1menes registrados. El admin puede agregarlos en el panel \u{1F510}';
-  return 'Tengo registradas <strong>' + tasks.length + '</strong> entradas. Preg\u00fantame por <strong>tareas</strong>, <strong>ex\u00e1menes</strong>, <strong>pr\u00f3ximas entregas</strong>, o lo que tengas <strong>hoy</strong> / <strong>ma\u00f1ana</strong>.';
+  // Fallback inteligente: muestra los 3 pendientes mas urgentes cuando no matchea ningun patron
+  var top3F = byPriority.slice(0, 3);
+  var outF = 'No entendi exactamente, pero aqui estan tus <strong>3 pendientes mas urgentes</strong>:\n\n';
+  outF += top3F.map(function(t, i){ return (i+1) + '. ' + priorityLabel(t) + '\n' + fmtTask(t); }).join('\n\n');
+  outF += '\n\n\u{1F4A1} Puedes preguntarme: <em>"que priorizar"</em>, <em>"plan de estudio"</em>, <em>"proximas entregas"</em>, <em>"hoy"</em> o <em>"manana"</em>.';
+  return outF;
 }
+/* anterior fallback eliminado */
 
 // Init
 function init(){
